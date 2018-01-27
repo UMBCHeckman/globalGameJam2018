@@ -51,7 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\scrip.cs" />
+     <Compile Include="Assets\colKeep.cs" />
+     <Compile Include="Assets\platform.cs" />
+     <Compile Include="Assets\PlatformerCharacter2D.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

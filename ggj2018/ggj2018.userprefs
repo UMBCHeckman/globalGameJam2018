@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\gameJam2017\Gravity testing\Gravity Test\Assets\Standard Assets\2D\Scripts\SickRiff.cs">
+    <Files>
+      <File FileName="Assets\PlatformerCharacter2D.cs" Line="88" Column="4" />
+      <File FileName="Assets\platform.cs" Line="87" Column="6" />
+      <File FileName="..\..\gameJam2017\Gravity testing\Gravity Test\Assets\Standard Assets\2D\Scripts\SickRiff.cs" Line="51" Column="26" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

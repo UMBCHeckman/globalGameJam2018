@@ -1,15 +1,18 @@
 ﻿using System;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
+//using UnityStandardAssets.CrossPlatformInput;
 
 namespace UnityStandardAssets._2D
 {
 	[RequireComponent(typeof (PlatformerCharacter2D))]
-	public class Platformer2DUserControl : MonoBehaviour
+	public class platform : MonoBehaviour
 	{
 		private PlatformerCharacter2D m_Character;
+		private Rigidbody2D m_body;
+		//public Rigidbody2D m_body;
 		//private bool m_Jump;
 		private float hbuff;
+		private float jbuff;
 		//rudimentary kill floor setup (KF)
 		//public Transform respawn;
 		//private float killFloor;
@@ -17,7 +20,8 @@ namespace UnityStandardAssets._2D
 		//public int APStart = 50;
 
 		void Start () {
-		//	killFloor = -25.0f;
+			m_body = GetComponent<Rigidbody2D>();
+			//	killFloor = -25.0f;
 			//APStart = 50;
 			//AP = 50;
 		}
@@ -29,6 +33,9 @@ namespace UnityStandardAssets._2D
 
 		private void Update()
 		{
+			//m_body.mass = 0;
+			//m_body.velocity = Vector2.zero;
+			//m_Character.Move(0,m_body.gravityScale);
 			/*if (!m_Jump)
             {
                 // Read the jump input in Update so button presses aren't missed.
@@ -46,7 +53,7 @@ namespace UnityStandardAssets._2D
 			//	killFloor = transform.position.y - 25.0f;
 			//if (transform.position.y < killFloor)
 			//{
-				/*
+			/*
 				this.transform.position = respawn.position; 	//respawn at beginning
 				this.transform.rotation = respawn.rotation;
 				killFloor = transform.position.y - 25.0f;
@@ -69,6 +76,10 @@ namespace UnityStandardAssets._2D
 			float input = h;
 			if (Mathf.Abs(hbuff) > Mathf.Abs(input))
 				h = 0;
+			float j = Input.GetAxis("Vertical"); // We're not using andriod anymore so fuck this -> Input.acceleration.x; 
+			float inputj = j;
+			if (Mathf.Abs(jbuff) > Mathf.Abs(inputj))
+				j = 0;
 			//if (h != 0) {
 			//	AP -= 1;
 			//}
@@ -77,9 +88,11 @@ namespace UnityStandardAssets._2D
 			//print(h);
 			//print("are u getting called?!?!?" + " " + h + " " + m_Jump);
 			// Pass all parameters to the character control script.
-			m_Character.Move(h)//, crouch, m_Jump);
+			//print(h);
+			m_Character.Move(h,j);//, crouch, m_Jump);
 			//m_Jump = false;
 			hbuff = input;
+			jbuff = inputj;
 		}
 	}
 }
