@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
 
@@ -20,8 +19,8 @@ public class BoardManager : MonoBehaviour
 	}
 
 	// board size
-	public int columns = 64;
-	public int rows = 64;
+	public int columns = 16;
+	public int rows = 16;
 	// number of buildings and zombies
 	public Count blockcount = new Count (5, 10);    // buildings cannot enter
 	public Count buildingcount = new Count (5, 10); // buildings can enter
