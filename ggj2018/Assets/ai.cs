@@ -11,8 +11,11 @@ namespace UnityStandardAssets._2D
 		private Rigidbody2D m_body;
 		//public Rigidbody2D m_body;
 		//private bool m_Jump;
+		private int counter;
 		private float hbuff;
 		private float jbuff;
+		private bool vCol;
+		private bool hCol;
 		public Rigidbody2D theBoy;
 		public BoxCollider2D wallcheckV;
 		public BoxCollider2D wallcheckH;
@@ -114,24 +117,35 @@ namespace UnityStandardAssets._2D
 			//	h = 0;
 			//	j = -1;
 			//}
-			if(OnTriggerEnter2D(wallcheckV)){
+			//OnTriggerStay2D(wallcheckV);
+			if (vCol) {
 				h = 1;
-				j = 0;
+			}
+			if (hCol) {
+				j = 1;
 			}
 			m_Character.Move(h,j, .5f);//, crouch, m_Jump);
 			//m_Jump = false;
 			hbuff = input;
 			jbuff = inputj;
 		}
-		bool OnTriggerEnter2D(Collider2D col)
+
+		void OnTriggerStay2D(Collider2D wallcheckV)
 		{
 			//m_enemy = GameObject.Find("Bird");
-			if (col.gameObject.tag == "wall") {
-				//print ("wwW");
-				return true;
-			} else {
-				//print ("ah");
-				return false;
+			if (wallcheckV.gameObject.tag == "bg") {
+				print ("oh");
+				counter += 1;
+				if (counter >= 30) {
+					counter = 0;
+					vCol = false;
+				}
+				//return;
+			}
+			if (wallcheckV.gameObject.tag == "wall") {
+				print ("oh");
+				vCol = true;
+				return;
 			}
 		}
 	}
