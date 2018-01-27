@@ -55,7 +55,7 @@ namespace UnityStandardAssets._2D
 		}
 
 
-		public void Move(float move, float movej)
+		public void Move(float move, float movej, float speed)
 		{
 			//print ("i'm moving :333 " + move);// + ", " + crouch + ", " + jump);
 			//only control the player if grounded or airControl is turned on
@@ -67,25 +67,16 @@ namespace UnityStandardAssets._2D
 				m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
 				// Move the character
-				float vertMax = m_MaxSpeed;
+				float vertMax = m_MaxSpeed * speed;
 				if(move !=0)
 					move = Mathf.Sign(move);
 				if(movej !=0)
 					movej = Mathf.Sign(movej);
-				m_Rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, movej*vertMax);
+				m_Rigidbody2D.velocity = new Vector2(move*vertMax, movej*vertMax);
 
 				// If the input is moving the player right and the player is facing left...
 			}
 			// If the player should jump...
-		}
-		void OnTriggerEnter2D(Collider2D col)
-		{
-			//m_enemy = GameObject.Find("Bird");
-			if (col.gameObject.tag == "wall")
-			{
-				print ("ww");
-				Move (0, 0);
-			}
 		}
 	}
 }

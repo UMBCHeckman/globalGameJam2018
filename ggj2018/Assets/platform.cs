@@ -89,7 +89,7 @@ namespace UnityStandardAssets._2D
 			//print("are u getting called?!?!?" + " " + h + " " + m_Jump);
 			// Pass all parameters to the character control script.
 			//print(h);
-			m_Character.Move(h,j);//, crouch, m_Jump);
+			m_Character.Move(h,j, 1f);//, crouch, m_Jump);
 			//m_Jump = false;
 			hbuff = input;
 			jbuff = inputj;
