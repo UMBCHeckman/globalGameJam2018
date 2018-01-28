@@ -24,6 +24,7 @@ namespace UnityStandardAssets._2D
 		private float timer;
 		public int lootTime;
 		private bool looting;
+		private bool bool_looted;
 		public Animator m_houseAnim;
 
 		private void Awake()
@@ -57,29 +58,19 @@ namespace UnityStandardAssets._2D
 			m_Rigidbody2D.gravityScale = Math.Min(3.0f/((Math.Max(1+ m_GravityScaleWithHeight * transform.position.y,1.0f))),3.0f);
 			//m_Rigidbody2D.gravityScale = 3.0f / m_GravityScaleWithHeight * (transform.position.y + 1);
 			if (looting == true) {
-				if(lootTime == 0)
-					m_houseAnim.Play ("looting", -1, 0f);
 				lootTime += 1;
-
-			} else if (looting == false) {
-				m_houseAnim.Play ("unLooted", -1, 0f);
+			}
+			else if (looting == false) {
 				lootTime = 0;
 			}
 			print (lootTime);
-		}
-		public void looted(){
-
 		}
 		public void Loot(float loot){
 			if (loot != 0)
 				looting = true;
 			else
 				looting = false;
-			if (lootTime > 100) {
-				lootTime = 0;
-				looted ();
 			}
-		}
 		public void Move(float move, float movej, float speed)
 		{
 			//print ("i'm moving :333 " + move);// + ", " + crouch + ", " + jump);
@@ -107,7 +98,18 @@ namespace UnityStandardAssets._2D
 		{
 			//m_enemy = GameObject.Find("Bird");
 			//print(name);
-			if ((checker.gameObject.tag == "tower") && (lootTime >= 100)) {
+			if (checker.gameObject.tag == "loot"){
+				if (lootTime >= 60 && bool_looted == false) {
+					lootTime = 0;
+					bool_looted = true;
+					m_houseAnim.Play ("Looted", -1, 0f);
+				}
+				else if(looting == true && bool_looted == false)
+					m_houseAnim.Play ("looting", -1, 0f);
+				else if(looting == false && bool_looted == false)
+					m_houseAnim.Play ("unLooted", -1, 0f);
+			}
+			if ((checker.gameObject.tag == "tower") && (lootTime >= 60)) {
 				SceneManager.LoadScene ("startScreen");
 			}
 			if ((checker.gameObject.tag == "Enemy")) {

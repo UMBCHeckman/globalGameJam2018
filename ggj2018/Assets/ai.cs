@@ -16,6 +16,7 @@ namespace UnityStandardAssets._2D
 		private float hbuff;
 		private float jbuff;
 		public Rigidbody2D theBoy;
+		private Animator m_animator;
 		public V1col wallcheckV;
 		public H1col wallcheckH;
 		public V2col wallcheckV2;
@@ -28,6 +29,7 @@ namespace UnityStandardAssets._2D
 
 		void Start () {
 			m_body = GetComponent<Rigidbody2D>();
+			m_animator = GetComponent<Animator> ();
 			//	killFloor = -25.0f;
 			//APStart = 50;
 			//AP = 50;
@@ -72,6 +74,9 @@ namespace UnityStandardAssets._2D
 
 		private void FixedUpdate()
 		{
+			int r = UnityEngine.Random.Range (0, 60);
+			if (r == 1)
+				m_animator.Play ("glitch", -1, 0f);
 			//if (AP <= 0) {
 			//	print ("out of ap!");
 			//	m_Character.Move(0, false, false);
@@ -126,7 +131,7 @@ namespace UnityStandardAssets._2D
 			if (wallcheckH.hCol || wallcheckH2.hCol) {
 				j = 1;
 			}
-			m_Character.Move(h,j, .5f);//, crouch, m_Jump);
+			m_Character.Move(h,j, .2f);//, crouch, m_Jump);
 			//m_Jump = false;
 			hbuff = input;
 			jbuff = inputj;

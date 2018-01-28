@@ -8,6 +8,7 @@ TagManager:
   - bg
   - tower
   - Enemy
+  - loot
   layers:
   - Default
   - TransparentFX
