@@ -12,13 +12,14 @@ namespace UnityStandardAssets._2D
 		//public Rigidbody2D m_body;
 		//private bool m_Jump;
 		private int counter;
+		private int counter2;
 		private float hbuff;
 		private float jbuff;
-		private bool vCol;
-		private bool hCol;
 		public Rigidbody2D theBoy;
-		public BoxCollider2D wallcheckV;
-		public BoxCollider2D wallcheckH;
+		public V1col wallcheckV;
+		public H1col wallcheckH;
+		public V2col wallcheckV2;
+		public H2col wallcheckH2;
 		//rudimentary kill floor setup (KF)
 		//public Transform respawn;
 		//private float killFloor;
@@ -118,35 +119,17 @@ namespace UnityStandardAssets._2D
 			//	j = -1;
 			//}
 			//OnTriggerStay2D(wallcheckV);
-			if (vCol) {
+
+			if (wallcheckV.vCol || wallcheckV2.vCol) {
 				h = 1;
 			}
-			if (hCol) {
+			if (wallcheckH.hCol || wallcheckH2.hCol) {
 				j = 1;
 			}
 			m_Character.Move(h,j, .5f);//, crouch, m_Jump);
 			//m_Jump = false;
 			hbuff = input;
 			jbuff = inputj;
-		}
-
-		void OnTriggerStay2D(Collider2D wallcheckV)
-		{
-			//m_enemy = GameObject.Find("Bird");
-			if (wallcheckV.gameObject.tag == "bg") {
-				print ("oh");
-				counter += 1;
-				if (counter >= 30) {
-					counter = 0;
-					vCol = false;
-				}
-				//return;
-			}
-			if (wallcheckV.gameObject.tag == "wall") {
-				print ("oh");
-				vCol = true;
-				return;
-			}
 		}
 	}
 }
