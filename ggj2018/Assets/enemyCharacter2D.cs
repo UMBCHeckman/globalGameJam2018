@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace UnityStandardAssets._2D
 {
-	public class PlatformerCharacter2D : MonoBehaviour
+	public class enemyCharacter2D : MonoBehaviour
 	{
 		[SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
 		//[SerializeField] private float m_JumpForce;                  // Amount of force added when the player jumps.
@@ -56,30 +56,8 @@ namespace UnityStandardAssets._2D
 
 			m_Rigidbody2D.gravityScale = Math.Min(3.0f/((Math.Max(1+ m_GravityScaleWithHeight * transform.position.y,1.0f))),3.0f);
 			//m_Rigidbody2D.gravityScale = 3.0f / m_GravityScaleWithHeight * (transform.position.y + 1);
-			if (looting == true) {
-				if(lootTime == 0)
-					m_houseAnim.Play ("looting", -1, 0f);
-				lootTime += 1;
+		}
 
-			} else if (looting == false) {
-				m_houseAnim.Play ("unLooted", -1, 0f);
-				lootTime = 0;
-			}
-			print (lootTime);
-		}
-		public void looted(){
-
-		}
-		public void Loot(float loot){
-			if (loot != 0)
-				looting = true;
-			else
-				looting = false;
-			if (lootTime > 100) {
-				lootTime = 0;
-				looted ();
-			}
-		}
 		public void Move(float move, float movej, float speed)
 		{
 			//print ("i'm moving :333 " + move);// + ", " + crouch + ", " + jump);
@@ -102,18 +80,6 @@ namespace UnityStandardAssets._2D
 				// If the input is moving the player right and the player is facing left...
 			}
 			// If the player should jump...
-		}
-		void OnTriggerStay2D(Collider2D checker)//, Collider2D wallcheckH)
-		{
-			//m_enemy = GameObject.Find("Bird");
-			//print(name);
-			if ((checker.gameObject.tag == "tower") && (lootTime >= 100)) {
-				SceneManager.LoadScene ("startScreen");
-			}
-			if ((checker.gameObject.tag == "Enemy")) {
-				SceneManager.LoadScene ("startScreen");
-			}
-			print (this);
 		}
 	}
 }

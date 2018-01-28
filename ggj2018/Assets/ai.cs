@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace UnityStandardAssets._2D
 {
-	[RequireComponent(typeof (PlatformerCharacter2D))]
+	[RequireComponent(typeof (enemyCharacter2D))]
 	public class ai : MonoBehaviour
 	{
-		private PlatformerCharacter2D m_Character;
+		private enemyCharacter2D m_Character;
 		private Rigidbody2D m_body;
 		//public Rigidbody2D m_body;
 		//private bool m_Jump;
@@ -34,7 +34,7 @@ namespace UnityStandardAssets._2D
 		}
 		private void Awake()
 		{
-			m_Character = GetComponent<PlatformerCharacter2D>();
+			m_Character = GetComponent<enemyCharacter2D>();
 		}
 
 
