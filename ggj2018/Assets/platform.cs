@@ -10,11 +10,17 @@ namespace UnityStandardAssets._2D
 		private PlatformerCharacter2D m_Character;
 		private Rigidbody2D m_body;
 		public GameObject m_tower;
+		public Animator m_animator;
 		//public Rigidbody2D m_body;
 		//private bool m_Jump;
 		private float hbuff;
 		private float jbuff;
 		private float lbuff;
+		private bool bool_runright;
+		private bool bool_rundown;
+		private bool bool_runleft;
+		private bool bool_runup;
+		private bool bool_idle;
 		//rudimentary kill floor setup (KF)
 		//public Transform respawn;
 		//private float killFloor;
@@ -100,6 +106,45 @@ namespace UnityStandardAssets._2D
 				j = 0;
 			}
 			m_Character.Move(h,j, 1f);//, crouch, m_Jump);
+			if ((h > 0) && (!bool_runright)) {
+				m_animator.Play ("protag_runright", -1, 0f);
+				bool_runright = true;
+				bool_rundown = false;
+				bool_runleft = false;
+				bool_runup = false;
+				bool_idle = false;
+			}
+			else if ((h < 0) && (!bool_runleft)) {
+				m_animator.Play ("protag_runleft", -1, 0f);
+				bool_runleft = true;
+				bool_rundown = false;
+				bool_runup = false;
+				bool_runright = false;
+				bool_idle = false;
+			}
+			else if ((j > 0) && (!bool_runup)) {
+				m_animator.Play ("protag_runup", -1, 0f);
+				bool_runup = true;
+				bool_rundown = false;
+				bool_runleft = false;
+				bool_runright = false;
+				bool_idle = false;
+			}
+			else if ((j < 0) && (!bool_rundown)) {
+				m_animator.Play ("protag_rundown", -1, 0f);
+				bool_rundown = true;
+				bool_runleft = false;
+				bool_runup = false;
+				bool_runright = false;
+				bool_idle = false;
+			} else if (j == 0 && h == 0 && !bool_idle) {
+				m_animator.Play ("protag_idle", -1, 0f);
+				bool_idle = true;
+				bool_rundown = false;
+				bool_runleft = false;
+				bool_runup = false;
+				bool_runright = false;
+			}
 			m_Character.Loot(L);
 			//m_Jump = false;
 			hbuff = input;
