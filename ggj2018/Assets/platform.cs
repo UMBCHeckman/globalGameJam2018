@@ -9,10 +9,12 @@ namespace UnityStandardAssets._2D
 	{
 		private PlatformerCharacter2D m_Character;
 		private Rigidbody2D m_body;
+		public GameObject m_tower;
 		//public Rigidbody2D m_body;
 		//private bool m_Jump;
 		private float hbuff;
 		private float jbuff;
+		private float lbuff;
 		//rudimentary kill floor setup (KF)
 		//public Transform respawn;
 		//private float killFloor;
@@ -80,6 +82,10 @@ namespace UnityStandardAssets._2D
 			float inputj = j;
 			if (Mathf.Abs(jbuff) > Mathf.Abs(inputj))
 				j = 0;
+			float L = Input.GetAxis ("Loot");
+			float inputL = L;
+			if (Mathf.Abs(lbuff) > Mathf.Abs(inputL))
+				L = 0;
 			//if (h != 0) {
 			//	AP -= 1;
 			//}
@@ -89,10 +95,16 @@ namespace UnityStandardAssets._2D
 			//print("are u getting called?!?!?" + " " + h + " " + m_Jump);
 			// Pass all parameters to the character control script.
 			//print(h);
+			if (L == 1) {
+				h = 0;
+				j = 0;
+			}
 			m_Character.Move(h,j, 1f);//, crouch, m_Jump);
+			m_Character.Loot(L);
 			//m_Jump = false;
 			hbuff = input;
 			jbuff = inputj;
+			lbuff = inputL;
 		}
 	}
 }
